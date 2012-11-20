@@ -1,4 +1,3 @@
-# require helpers in project
 require 'haml'
 
 module Haml
@@ -14,3 +13,5 @@ module Haml
 
   end
 end
+
+require File.expand_path('helpers/haml', Bundler.root)

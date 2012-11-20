@@ -15,5 +15,5 @@ Gem::Specification.new do |s|
   s.platform      = Gem::Platform::RUBY
   s.require_paths = ['lib']
   s.rubyforge_project = '[none]'
-  spec.add_dependency 'haml', '~> 3.1.7'
+  s.add_dependency 'haml', '~> 3.1.7'
 end
