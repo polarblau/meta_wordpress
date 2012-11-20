@@ -1,5 +1,11 @@
 module MetaWordpress
   def self.foo
-    puts "MetaWordpress says hello"
+    "bar"
   end
+end
+
+puts "MetaWordpress included"
+
+def php(text)
+  "PHP, baby"
 end
