@@ -1,10 +1,4 @@
-# Because this is a gem, ignore Gemfile.lock:
-
 Gemfile.lock
-
-# And because this is Ruby, ignore the following
-#  (source: https://github.com/github/gitignore/blob/master/Ruby.gitignore):
-
 *.gem
 *.rbc
 .bundle
