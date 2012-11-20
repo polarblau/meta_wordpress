@@ -1,11 +1,2 @@
-module MetaWordpress
-  def self.foo
-    "bar"
-  end
-end
-
-puts "MetaWordpress included"
-
-def php(text)
-  "PHP, baby"
-end
+require File.expand_path('haml/helpers', File.dirname(__FILE__))
+require File.expand_path('haml/filters/php', File.dirname(__FILE__))
