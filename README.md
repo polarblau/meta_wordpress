@@ -90,3 +90,10 @@ compiles to
  */
 ?>
 ```
+
+## TODO
+
+* Implement layouts and partial rendering (**crucial!**)
+* Better error handling and display
+* Fix escaping in helpers
+* Add full Haml version of twentyeleven theme when bootstrapping (in progress)
