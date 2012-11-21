@@ -69,9 +69,10 @@ module MetaWordpress
 
       end
 
-     say
-     say 'All done!', :green
-     say
+      say
+      say 'All done!', :green
+      say
+
     end
 
   private

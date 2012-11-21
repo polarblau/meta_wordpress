@@ -1,3 +1,6 @@
 module ViewHelpers
-  # Add your own view helpers here ...
+
+  # define your own helpers here
+  # you will need to restart guard after any changes here
+
 end

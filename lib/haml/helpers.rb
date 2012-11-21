@@ -1,7 +1,11 @@
 module Haml
   module Helpers
 
-    # include user helpers if defined ...
+    user_helpers_file = File.expand_path('view_helpers.rb', Bundler.root)
+    if File.exists? user_helpers_file
+      require user_helpers_file
+      include ViewHelpers
+    end
 
     def php(text)
       if text.include? "\n"
