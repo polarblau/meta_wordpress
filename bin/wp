@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require 'rubygems'
+require 'thor'
+
 require 'meta_wordpress'
 require 'meta_wordpress/cli'
 
