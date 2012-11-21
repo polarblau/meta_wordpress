@@ -1,5 +1,7 @@
 source :rubygems
 
 group :development do
-  gem 'meta_wordpress', :git => 'git@github.com:polarblau/meta_wordpress.git'
+  gem 'meta_wordpress', :git    => 'git@github.com:polarblau/meta_wordpress.git'
+  gem 'guard-haml',     :git    => 'git://github.com/polarblau/guard-haml.git',
+                        :branch => 'extensions'
 end
