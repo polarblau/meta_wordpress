@@ -1,0 +1,14 @@
+require 'meta_wordpress'
+
+guard 'coffeescript',
+      :input  => 'javascripts/source',
+      :output => 'javascripts/compiled'
+
+guard 'haml',
+      :input => 'views' do
+        watch %r{^views/.+(\.haml)?}
+      end
+
+guard 'sass',
+      :input  => 'stylesheets/source',
+      :output => 'stylesheets/compiled'

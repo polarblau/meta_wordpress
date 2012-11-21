@@ -1,0 +1,12 @@
+/*
+Theme Name: <%= @theme_name %>
+Theme URI: <%= @theme_uri %>
+Author: <%= @theme_author %>
+Author URI: <%= @theme_author_uri %>
+Description: <%= @theme_description %>
+Version: <%= @theme_version %>
+License: <%= @theme_license %>
+License URI: <%= @theme_license_uri %>
+Tags: <%= @theme_tags %>
+Text Domain: <%= @theme_tags %>
+*/

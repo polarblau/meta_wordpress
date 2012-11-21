@@ -21,10 +21,13 @@ describe "Haml::Helpers" do
     end
 
   end
-end
 
-describe "User helpers" do
-  it "should be defined" do
+  describe "User helpers" do
+    it "should be defined" do
 
+    end
   end
+
 end
+
+
