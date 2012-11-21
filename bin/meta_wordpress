@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'meta_wordpress'
+require 'meta_wordpress/cli'
+
+MetaWordpress::CLI.start

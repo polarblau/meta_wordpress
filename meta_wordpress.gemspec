@@ -16,10 +16,12 @@ Gem::Specification.new do |s|
   s.platform      = Gem::Platform::RUBY
   s.require_paths = ['lib']
   s.rubyforge_project = '[none]'
-  s.executable   = 'wordpress_meta'
+  s.executable   = 'meta_wordpress'
 
   # Dependencies
   # (There's a lot of them, because this gem is merely a collector at this point)
+  s.add_dependency 'thor',                '>= 0.14.6'
+
   s.add_dependency 'guard',               '~> 1.5.4'
   s.add_dependency 'rb-fsevent',          '~> 0.9.1'
 
