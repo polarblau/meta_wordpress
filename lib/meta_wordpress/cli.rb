@@ -1,24 +1,30 @@
 require 'thor'
 
 module MetaWordpress
-  class Bootstrap < Thor::Group
+  class CLI < Thor
     include Thor::Actions
 
     def self.source_root
-      File.expand_path(File.join('lib', 'templates'), __FILE__)
+      File.expand_path(File.join('..', 'templates'), File.dirname(__FILE__))
     end
 
-    def create_gemfile_and_bundle
-      template 'Gemfile', 'Gemfile'
+    desc 'start', 'Start guard and listen for changes.'
+    def start
+      run 'bundle exec guard -n f'
+    end
+
+    desc 'bootstrap', 'Generate blank WP theme and set it up for Meta Wordpress.'
+    def bootstrap
+
+      # Dependencies
+      template 'Gemfile.tt', 'Gemfile'
       run 'bundle install'
-    end
 
-    def setup_guard_files
-      template 'Guardfile', 'Guardfile'
-    end
+      # Guard file
+      template 'Guardfile.tt', 'Guardfile'
 
-    def create_meta_folders
-      %w(javascripts empty_directory).each do |folder|
+      # Meta language folders
+      %w(javascripts stylesheets).each do |folder|
         empty_directory folder
         inside folder do
           empty_directory 'source'
@@ -28,26 +34,25 @@ module MetaWordpress
         end
       end
       empty_directory 'views'
+      # TODO: create version of twentyeleven in HAML and copy?
       create_file 'views/.gitkeep'
-    end
 
-    def create_view_helpers
-      template 'view_helpers', 'view_helpers.rb'
-    end
+      # User view helpers
+      template 'view_helpers.tt', 'view_helpers.rb'
 
-    def theme_files
+      # Theme file
       say "Please provide some details on the theme:"
-      @theme_name        = ask("Theme name (required)")
-      @theme_uri         = ask("Theme URL")
-      @theme_author      = ask("Author(s)")
-      @theme_author_uri  = ask("Author(s) URL")
-      @theme_description = ask("Description")
-      @theme_version     = ask("Version") || "0.1"
-      @theme_license     = ask("License")
-      @theme_license_uri = ask("License URL")
-      @theme_tags        = ask("Tags (comma separated)")
-      @theme_text_domain = ask("Text domain")
-      template 'style', 'style.css'
+      @theme_name        = ask("Theme name:")
+      @theme_uri         = ask("Theme URL:")
+      @theme_author      = ask("Author(s):")
+      @theme_author_uri  = ask("Author(s) URL:")
+      @theme_description = ask("Description:")
+      @theme_version     = ask("Version:") || "0.1"
+      @theme_license     = ask("License:")
+      @theme_license_uri = ask("License URL:")
+      @theme_tags        = ask("Tags (comma separated):")
+      @theme_text_domain = ask("Text domain:")
+      template 'style.tt', 'style.css'
     end
 
   end
