@@ -20,7 +20,7 @@ wp bootstrap my_theme
 cd my_theme
 ```
 
-Add Haml files in th e`views/` directory with the extension `.php.haml` will be compiled into the theme root
+Add Haml files in th e`views/` directory with the extension `.php.haml` will be compiled into the theme root.
 Sass files in the `stylesheets/source/` directory will be compiled into `stylesheets/compiled/` 
 and Coffeescript files from `javascripts/source/` to javascripts/compiled`.
 
