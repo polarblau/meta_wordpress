@@ -1,10 +1,10 @@
-require 'rake'
-require 'rake/testtask'
+require 'bundler'
+Bundler::GemHelper.install_tasks
+require 'rspec/core/rake_task'
 
-Rake::TestTask.new do |t|
-  t.libs << 'lib'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = false
+RSpec::Core::RakeTask.new(:rspec) do |spec|
+  spec.pattern = 'spec/**/*_spec.rb'
+  spec.rspec_opts = ['-cfs --backtrace --color']
 end
 
-task :default => :test
+task :default => :rspec

@@ -12,7 +12,8 @@ Gem::Specification.new do |s|
   s.summary       = "Work on WP with your favorite meta languages"
   s.summary       = "Helpers for the work with Wordpress using meta languages such as HAML, SASS and Coffeescript."
 
-  s.files         = `git ls-files app lib`.split("\n")
+  s.files         = `git ls-files -- lib/*`.split("\n")
+  s.test_files    = `git ls-files -- spec/*`.split("\n")
   s.platform      = Gem::Platform::RUBY
   s.require_paths = ['lib']
   s.rubyforge_project = '[none]'

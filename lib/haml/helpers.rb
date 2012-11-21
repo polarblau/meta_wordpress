@@ -1,5 +1,3 @@
-require 'haml'
-
 module Haml
   module Helpers
 
@@ -14,4 +12,5 @@ module Haml
   end
 end
 
-require File.expand_path('helpers/haml', Bundler.root)
+user_helpers = File.expand_path('helpers/haml', Bundler.root)
+require user_helpers if File.exists?(user_helpers)
