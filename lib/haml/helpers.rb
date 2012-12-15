@@ -4,7 +4,7 @@ module Haml
     user_helpers_file = File.expand_path('view_helpers.rb', Bundler.root)
     if File.exists? user_helpers_file
       require user_helpers_file
-      include ViewHelpers
+      include MetaWordpress::ViewHelpers
     end
 
     def php(text)
@@ -17,3 +17,5 @@ module Haml
 
   end
 end
+
+
