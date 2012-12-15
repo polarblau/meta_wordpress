@@ -195,6 +195,8 @@ Here's an example overview:
 
 ## TODO
 
+* Compile all views when installing
+* Clean installation logs and add some help texts
 * Better error handling and display
 * Fix escaping in helpers
 * Add full Haml version of a basic theme when bootstrapping
