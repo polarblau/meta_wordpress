@@ -38,7 +38,7 @@ cd my_theme
 
 * **Haml files** in the `views/` directory with the extension `.php.haml` will be compiled into the theme root.
 * **Sass files** in the `stylesheets/source/` directory will be compiled into `stylesheets/compiled/` 
-* **Coffeescript files** from `javascripts/source/` to javascripts/compiled`.
+* **Coffeescript files** from `javascripts/source/` to `javascripts/compiled`.
 
 Guard is used to watch for changes and recompile files when necessary. For convenience you can start Guard in a Bundler context using:
 
@@ -66,7 +66,7 @@ compiles to
 
 A few filters are packaged as well
 
-#### `php`
+##### `php`
 
 ```haml
 :php
