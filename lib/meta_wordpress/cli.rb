@@ -32,7 +32,7 @@ module MetaWordpress
         run 'bundle install'
 
         # Guard file
-        copy_file 'Guardfile', 'Guardfile'
+        copy_file '../Guardfile', 'Guardfile'
 
         # Meta language folders
         %w(javascripts stylesheets).each do |folder|
@@ -49,11 +49,11 @@ module MetaWordpress
         inside('views') { create_file('.gitkeep') }
 
         # User view helpers
-        copy_file 'view_helpers.rb', 'view_helpers.rb'
+        copy_file '../view_helpers.rb', 'view_helpers.rb'
         
         # functions.php
-        copy_file 'functions.php', 'functions.php'
-        directory 'lib', 'lib'
+        copy_file '../functions.php', 'functions.php'
+        directory '../lib', 'lib'
 
         # Theme file
         say "Please provide some details on the theme:"
@@ -69,7 +69,7 @@ module MetaWordpress
         @theme_tags        = ask("Tags (comma separated):\n      > ")
         @theme_text_domain = ask("Text domain:\n      > ")
 
-        template 'style.tt', 'style.css'
+        template '../style.tt', 'style.css'
 
       end
 
