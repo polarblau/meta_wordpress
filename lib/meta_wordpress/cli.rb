@@ -28,7 +28,7 @@ module MetaWordpress
       inside theme do
 
         # Dependencies
-        copy_file 'Gemfile.tt', 'Gemfile'
+        copy_file '../Gemfile', 'Gemfile'
         run 'bundle install'
 
         # Guard file
