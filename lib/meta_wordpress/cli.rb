@@ -28,11 +28,11 @@ module MetaWordpress
       inside theme do
 
         # Dependencies
-        template '../Gemfile.tt', 'Gemfile'
+        copy_file '../Gemfile', 'Gemfile'
         run 'bundle install'
 
         # Guard file
-        template '../Guardfile.tt', 'Guardfile'
+        copy_file '../Guardfile', 'Guardfile'
 
         # Meta language folders
         %w(javascripts stylesheets).each do |folder|
@@ -49,7 +49,11 @@ module MetaWordpress
         inside('views') { create_file('.gitkeep') }
 
         # User view helpers
-        template '../view_helpers.tt', 'view_helpers.rb'
+        copy_file '../view_helpers.rb', 'view_helpers.rb'
+        
+        # functions.php
+        template '../functions.tt', 'functions.rb'
+        directory '../lib', 'lib'
 
         # Theme file
         say "Please provide some details on the theme:"

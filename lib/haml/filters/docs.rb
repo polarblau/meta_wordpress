@@ -6,7 +6,7 @@ module Haml
       include Haml::Filters::Base
 
       def render(text)
-        "<?php\n/**\n%s\n */?>" % text.split("\n").map{|l| " * #{l}" }.join("\n")
+        "<?php\n/**\n%s\n */\n?>" % text.split("\n").map{|l| " * #{l}" }.join("\n")
       end
 
     end
