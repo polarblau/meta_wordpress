@@ -1,15 +1,18 @@
 require 'meta_wordpress'
 
 guard 'coffeescript',
-      :input  => 'javascripts/source',
-      :output => 'javascripts/compiled'
+      :all_on_start => true,
+      :input        => 'javascripts/source',
+      :output       => 'javascripts/compiled'
 
 guard 'haml',
       :haml_options => { :escape_attrs => false },
-      :input => 'views' do
+      :run_at_start => true,
+      :input        => 'views' do
         watch %r{^views/.+(\.haml)?}
       end
 
 guard 'sass',
-      :input  => 'stylesheets/source',
-      :output => 'stylesheets/compiled'
+      :all_on_start => true,
+      :input        => 'stylesheets/source',
+      :output       => 'stylesheets/compiled'
