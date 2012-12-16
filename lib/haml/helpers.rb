@@ -9,6 +9,7 @@ module Haml
     end
 
     def php(text, &block)
+      text = "$#{text}" if text.is_a? Symbol
       output = if text.include? "\n"
         "<?php\n  %s\n?>" % text.rstrip.gsub("\n", "\n  ")
       else
