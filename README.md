@@ -62,6 +62,19 @@ compiles to
 <h1><?php echo $headline ?></h1>
 ```
 
+The `php` helper takes a block as second argument to allow for better readability through indentation:
+
+```haml
+#primary
+  #content(role="main")
+    = php "if (have_posts()):" do
+      = php "while (have_posts()):" do
+        = php "the_post()"
+        %h2= php "the_title()"
+      = php "endwhile"
+    = php "endif"
+```
+
 #### Filters
 
 A few filters are packaged as well
@@ -150,18 +163,37 @@ Within your template or layout you can render a partial using the PHP function `
   = php "render_partial('header')"
 ```
 
-*HINT: Remember that you can define your own view helpers to make these function calls even more concise. In fact, the default theme comes with a few shortcuts as examples, which you are free to remove or edit. Here’s an example:*
+*HINT: If you’re feeling adventurous you can include the `MetaWordpress::PHPHelpers` module into the view helpers.*
 
 ```ruby
+require 'meta_wordpress/php_helpers'
+
 module ViewHelpers
-  # let's you use `= layout :foobar` in your template:
-  def layout(layout_name)
-    php "use_layout('#{layout_name}')"
-  end
+  include MetaWordpress::PHPHelpers
 end
 ```
 
-Here's an example overview:
+This includes the following shorcuts to PHP function calls:
+
+```ruby
+layout(NAME) 
+# => <?php use_layout(NAME) ?>
+
+partial(NAME) 
+# => <?php render_partial(NAME) ?>
+
+yield_content
+# => <?php yield() ?>
+```
+
+**Argument conversion!** — Symbols are converted to PHP variables for convenience:
+
+```ruby
+layout(:foo, "bar", 1, true)
+# => <?php use_layout($foo, "bar", 1, true) ?>
+```
+
+Here's an example overview over the layouts structure:
 
 ```
 
