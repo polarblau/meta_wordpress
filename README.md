@@ -124,6 +124,36 @@ compiles to
 Since Haml closes all HTML tags for you, you can’t easily split tags across view files as it is standard practice with most Wordpress themes (just think of the `<body>` tag starting in `header.php` and ending in `footer.php`). 
 To be able to build a theme “the Haml way”, you will need to think of your theme in a slightly different way — if you're coming from frameworks like Rails, this will look familiar to you.
 
+```
+
+   +---------------------------------------------------------------+
+   | /views/layout/default.php.haml                                |
+   +---------------------------------------------------------------+
+   | +----------------------------------------------------------+  |
+   | | /views/partials/_header.php.haml                         |  |
+   | |----------------------------------------------------------|  |
+   | |                                                          |  |
+   | |  = php "render_partial('header')"                        |  |
+   | |                                                          |  |
+   | +----------------------------------------------------------+  |
+   | +----------------------------------------------------------+  |
+   | | /views/single.php.haml                                   |  |
+   | |----------------------------------------------------------|  |
+   | |                                                          |  |
+   | |  = php "yield_content()"                                 |  |
+   | |                                                          |  |
+   | +----------------------------------------------------------+  |
+   | +----------------------------------------------------------+  |
+   | | /views/partials/_footer.php.haml                         |  |
+   | |----------------------------------------------------------|  |
+   | |                                                          |  |
+   | |  = php "render_partial('footer')"                        |  |
+   | |                                                          |  |
+   | +----------------------------------------------------------+  |
+   +---------------------------------------------------------------+
+   
+```
+
 ##### Layouts
 
 meta_wordpress requires you to wrap your templates (such as `index` or `single`) into a layout file. Layout files are stored in the `/views/layouts` folder. 
@@ -193,42 +223,9 @@ layout(:foo, "bar", 1, true)
 # => <?php use_layout($foo, "bar", 1, true) ?>
 ```
 
-Here's an example overview over the layouts structure:
-
-```
-
-   +---------------------------------------------------------------+
-   | /views/layout/default.php.haml                                |
-   +---------------------------------------------------------------+
-   | +----------------------------------------------------------+  |
-   | | /views/partials/_header.php.haml                         |  |
-   | |----------------------------------------------------------|  |
-   | |                                                          |  |
-   | |  = php "render_partial('header')"                        |  |
-   | |                                                          |  |
-   | +----------------------------------------------------------+  |
-   | +----------------------------------------------------------+  |
-   | | /views/single.php.haml                                   |  |
-   | |----------------------------------------------------------|  |
-   | |                                                          |  |
-   | |  = php "yield_content()"                                 |  |
-   | |                                                          |  |
-   | +----------------------------------------------------------+  |
-   | +----------------------------------------------------------+  |
-   | | /views/partials/_footer.php.haml                         |  |
-   | |----------------------------------------------------------|  |
-   | |                                                          |  |
-   | |  = php "render_partial('footer')"                        |  |
-   | |                                                          |  |
-   | +----------------------------------------------------------+  |
-   +---------------------------------------------------------------+
-   
-```
-
 ## TODO
 
 * Compile all views when installing
 * Clean installation logs and add some help texts
 * Better error handling and display
-* Fix escaping in helpers
 * Add full Haml version of a basic theme when bootstrapping
