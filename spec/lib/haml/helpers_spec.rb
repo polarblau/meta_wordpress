@@ -20,6 +20,10 @@ describe "Haml::Helpers" do
         should == "<?php\n  $foo = 'bar';\n  $bar = 'foo';\n?>"
     end
 
+    it "should convert symbols" do
+      subject.php(:foo).should == "<?php echo $foo ?>"
+    end
+
   end
 
   describe "User helpers" do

@@ -5,6 +5,7 @@ guard 'coffeescript',
       :output => 'javascripts/compiled'
 
 guard 'haml',
+      :haml_options => { :escape_attrs => false },
       :input => 'views' do
         watch %r{^views/.+(\.haml)?}
       end
