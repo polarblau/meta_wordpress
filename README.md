@@ -176,22 +176,21 @@ end
 This includes the following shorcuts to PHP function calls:
 
 ```ruby
-
 layout(NAME) 
-=> <?php use_layout(NAME) ?>
+# => <?php use_layout(NAME) ?>
 
 partial(NAME) 
-=> <?php render_partial(NAME) ?>
+# => <?php render_partial(NAME) ?>
 
 yield_content
-=> <?php yield() ?>
+# => <?php yield() ?>
 ```
 
 **Argument conversion!** — Symbols are converted to PHP variables for convenience:
 
 ```ruby
 layout(:foo, "bar", 1, true)
-=> <?php use_layout($foo, "bar", 1, true) ?>
+# => <?php use_layout($foo, "bar", 1, true) ?>
 ```
 
 Here's an example overview over the layouts structure:
