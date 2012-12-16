@@ -2,14 +2,14 @@
 
 **This gem has not been released yet and is NOT production ready. (I wouldn’t mind feedback, though).**
 
-*TL;DR* — Use Haml, Sass, Coffeescript (and Ruby :open_mouth:) to build Wordpress themes. 
+*TL;DR* — Use Haml, Sass, Coffeescript (and Ruby :open_mouth:) to build Wordpress themes.
 
 ***
 
 Building sites with Wordpress is often painful (PHP) enough. Using our favorite tools from the Ruby world such as Haml, Sass and Coffeescript would certainly help.
 Unfortunately the current PHP implementations of Haml can’t be really recommended for different reasons. The biggest problem seems to be a lot of added complexity — which ways in immediately when things go wrong.
 
-This gem lets you use the original implementations of all your favorite meta languages and compiles the files in the most transparent way — keeping both source and result around for inspection. The compilation is done using Guard and *meta_wordpress* simply provides a few helpers to get you started. 
+This gem lets you use the original implementations of all your favorite meta languages and compiles the files in the most transparent way — keeping both source and result around for inspection. The compilation is done using Guard and *meta_wordpress* simply provides a few helpers to get you started.
 
 ## Usage
 
@@ -37,7 +37,7 @@ cd my_theme
 ### Building a theme
 
 * **Haml files** in the `views/` directory with the extension `.php.haml` will be compiled into the theme root.
-* **Sass files** in the `stylesheets/source/` directory will be compiled into `stylesheets/compiled/` 
+* **Sass files** in the `stylesheets/source/` directory will be compiled into `stylesheets/compiled/`
 * **Coffeescript files** from `javascripts/source/` to `javascripts/compiled`.
 
 Guard is used to watch for changes and recompile files when necessary. For convenience you can start Guard in a Bundler context using:
@@ -56,7 +56,7 @@ The gem includes currently some helpers (more to be added if helpful) and *you c
 %1
   = php "echo $headline"
 ```
-compiles to 
+compiles to
 
 ```html
 <h1><?php echo $headline ?></h1>
@@ -86,10 +86,10 @@ A few filters are packaged as well
   $headline = "foo";
   echo $headline;
 ```
-compiles to 
+compiles to
 
 ```html
-<?php 
+<?php
   $headline = "foo"
   echo $headline;
 ?>
@@ -105,7 +105,7 @@ compiles to
   @subpackage Twenty_Eleven
   @since Twenty Eleven 1.0
 ```
-compiles to 
+compiles to
 
 ```html
 <?php
@@ -121,7 +121,7 @@ compiles to
 
 #### View structure
 
-Since Haml closes all HTML tags for you, you can’t easily split tags across view files as it is standard practice with most Wordpress themes (just think of the `<body>` tag starting in `header.php` and ending in `footer.php`). 
+Since Haml closes all HTML tags for you, you can’t easily split tags across view files as it is standard practice with most Wordpress themes (just think of the `<body>` tag starting in `header.php` and ending in `footer.php`).
 To be able to build a theme “the Haml way”, you will need to think of your theme in a slightly different way — if you're coming from frameworks like Rails, this will look familiar to you.
 
 ```
@@ -151,12 +151,12 @@ To be able to build a theme “the Haml way”, you will need to think of your t
    | |                                                          |  |
    | +----------------------------------------------------------+  |
    +---------------------------------------------------------------+
-   
+
 ```
 
 ##### Layouts
 
-meta_wordpress requires you to wrap your templates (such as `index` or `single`) into a layout file. Layout files are stored in the `/views/layouts` folder. 
+meta_wordpress requires you to wrap your templates (such as `index` or `single`) into a layout file. Layout files are stored in the `/views/layouts` folder.
 
 If no layout file is defined specifically, a file `/views/layouts/default.php.haml`  is expected.
 You can specify a different layout at the top your template, using the PHP function `use_layout()` passing the name of a layout file — e.g.:
@@ -165,7 +165,7 @@ You can specify a different layout at the top your template, using the PHP funct
 
 ```haml
 = php "use_layout('foobar')"
-``` 
+```
 
 Within your layout you need to make a call to the PHP function `yield_content()` at the location where you want to render your actual template — e.g.:
 
@@ -206,10 +206,10 @@ end
 This includes the following shorcuts to PHP function calls:
 
 ```ruby
-layout(NAME) 
+layout(NAME)
 # => <?php use_layout(NAME) ?>
 
-partial(NAME) 
+partial(NAME)
 # => <?php render_partial(NAME) ?>
 
 yield_content
@@ -225,7 +225,6 @@ layout(:foo, "bar", 1, true)
 
 ## TODO
 
-* Compile all views when installing
 * Clean installation logs and add some help texts
 * Better error handling and display
 * Add full Haml version of a basic theme when bootstrapping
