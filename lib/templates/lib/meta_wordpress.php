@@ -1,5 +1,5 @@
 <?php
 
-require_once 'meta_wordpress/layout_helpers.php';
+require_once 'meta_wordpress/wordpress_layout.php';
 
 ?>
