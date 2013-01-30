@@ -115,15 +115,17 @@ class Layout {
       $template_content = file_get_contents($template);
       $template_content = $this->capture_eval($template_content);
 
-      $this->template_content = $this->replace_fragments_placeholders($template_content);
+      $this->template_content = $template_content;
       // template content needs to be set before layout is evaluated
       // since yield() will expect it to be set
 
-      echo $this->capture_eval(file_get_contents($this->get_layout_path()));
+      $output = $this->capture_eval(file_get_contents($this->get_layout_path()));
+      $output = $this->replace_fragments_placeholders($output);
+
+      echo $output;
       return null;
     }
 
-    // Invalid template supplied, let Wordpress deal with this
     return $template;
   }
 

@@ -15,7 +15,10 @@ module MetaWordpress
     end
 
     desc 'bootstrap [THEME]', 'Bootstrap blank meta WP theme with a name of THEME (optional).'
+    method_option :skip_theme, :type => :boolean, :default => false, :desc => "Don't create any theme template files."
     def bootstrap(theme = destination_root)
+
+      @skip_theme = options[:skip_theme]
 
       if theme.include? '/'
         raise Thor::Error.new "Sorry. '#{theme}' seems to be a path. Please provide a folder name."
@@ -28,13 +31,13 @@ module MetaWordpress
       inside theme do
 
         # Dependencies
-        copy_file '../Gemfile', 'Gemfile'
+        copy_file 'Gemfile', 'Gemfile'
         run 'bundle install'
 
         # Guard file
-        copy_file '../Guardfile', 'Guardfile'
+        copy_file 'Guardfile', 'Guardfile'
 
-        # Meta language folders
+        # Meta languages folders
         %w(javascripts stylesheets).each do |folder|
           empty_directory folder
           inside folder do
@@ -44,16 +47,15 @@ module MetaWordpress
             create_file 'compiled/.gitkeep'
           end
         end
-        # TODO: create version of twentyeleven in HAML and copy?
+
         empty_directory 'views'
-        inside('views') { create_file('.gitkeep') }
 
         # User view helpers
-        copy_file '../view_helpers.rb', 'view_helpers.rb'
-        
+        template 'view_helpers.tt', 'view_helpers.rb'
+
         # functions.php
-        copy_file '../functions.php', 'functions.php'
-        directory '../lib', 'lib'
+        copy_file 'functions.php', 'functions.php'
+        directory 'lib', 'lib'
 
         # Theme file
         say "Please provide some details on the theme:"
@@ -69,7 +71,13 @@ module MetaWordpress
         @theme_tags        = ask("Tags (comma separated):\n      > ")
         @theme_text_domain = ask("Text domain:\n      > ")
 
-        template '../style.tt', 'style.css'
+        template 'style.tt', 'style.css'
+
+        if @skip_theme
+          inside('views') { create_file('.gitkeep') }
+        else
+          directory 'theme', 'views'
+        end
 
       end
 

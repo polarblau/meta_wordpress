@@ -1,0 +1,8 @@
+#primary
+  #content(role="main")
+    = php "if (have_posts()):" do
+      = php "while (have_posts()):" do
+        = php "the_post()"
+        %h2= php "the_title()"
+      = php "endwhile"
+    = php "endif"

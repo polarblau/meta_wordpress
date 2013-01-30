@@ -4,7 +4,7 @@ module MetaWordpress
     METHODS = {
       :layout        => "use_layout('[*]')",
       :partial       => "render_partial('[*]')",
-      :yield_content => "yield()"
+      :yield_content => "yield_foo()"
     }
 
     METHODS.each do |method, php_value|

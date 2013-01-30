@@ -1,0 +1,17 @@
+%h1 Header
+
+= partial "header"
+= yield_content
+
+= php "if ('condi' < 123):" do
+  %h2
+    %span Foobar
+= php "endif;"
+
+%a(href="#{ php("http://foobar.com") }")
+  Foobar link
+
+%p
+  = php :foo
+
+%h2 Footer
