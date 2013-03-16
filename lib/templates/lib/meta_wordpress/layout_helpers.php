@@ -7,7 +7,6 @@
  * @copyright  2012 Florian Plank
  * @license    http://mit-license.org/ MIT License
  * @version    0.1
- * @see        NetOther, Net_Sample::Net_Sample()
  * @since      Version 0.1
  */
  
