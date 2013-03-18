@@ -31,8 +31,19 @@ module MetaWordpress
       inside theme do
 
         # Dependencies
-        copy_file 'Gemfile', 'Gemfile'
-        run 'bundle install'
+        gemfile = File.join(destination_root, 'Gemfile')
+        if Pathname.exist? gemfile
+          say "Gemfile detected, installing dependencies."
+          append_to_file gemfile, "gem 'guard-haml'"
+          append_to_file gemfile, "gem 'guard-sass'"
+          append_to_file gemfile, "gem 'guard-coffee'"
+
+          run 'bundle install', :capture => true
+        else
+          say "WARNING! No Gemfile found."
+          say "Ensure that the reuqired dependencies are installed properly."
+        end
+
 
         # Guard file
         copy_file 'Guardfile', 'Guardfile'
@@ -78,7 +89,6 @@ module MetaWordpress
         else
           directory 'theme', 'views'
         end
-
       end
 
       say
