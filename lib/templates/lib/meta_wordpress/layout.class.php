@@ -17,15 +17,16 @@ class Layout {
 
   private $fragments              = array();
   private $fragments_placeholders = array();
-  private $layout                 = null;
+  public $layout                 = null;
   private $template_content       = null;
   private $settings               = array(
-    'views_path'                  => '',
-    'partials_path'               => 'partials',
-    'layouts_path'                => 'layouts',
-    'default_layout_name'         => 'default'
+    'views_path'          => '',
+    'partials_path'       => 'partials',
+    'layouts_path'        => 'layouts',
+    'default_layout_name' => 'default'
   );
 
+  // Singleton pattern: http://stackoverflow.com/a/2247384/564721
   private function __construct() {}
   private function __clone() {}
 
@@ -41,7 +42,7 @@ class Layout {
    * template contents and echos them into view
    *
    * @access public
-   * @param {string} name Fragment identifer
+   * @param {string} name Fragment identifier
    */
   public function yield($name = null) {
     if (isset($name) && !empty($name)) {
@@ -126,6 +127,7 @@ class Layout {
       return null;
     }
 
+    // Invalid template supplied, let Wordpress deal with this
     return $template;
   }
 
@@ -137,7 +139,7 @@ class Layout {
    * @param string layout Layout file name
    */
   public function set_layout($name) {
-    $this->layout = $layout;
+    $this->layout = $name;
   }
 
   /**
