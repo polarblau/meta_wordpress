@@ -15,7 +15,7 @@ module MetaWordpress
     method_option :skip_theme, :type => :boolean, :default => false, :desc => "Don't create any theme template files."
     def bootstrap(theme_name = destination_root)
       @skip_theme = options[:skip_theme]
-      
+
       if theme_name.include?('/')
         raise Thor::Error.new "Sorry. '#{theme_name}' seems to be a path. Please provide a folder name."
       end
@@ -32,7 +32,7 @@ module MetaWordpress
       ask_for_theme_details(theme_name)
       create_stylesheet
       copy_theme
-      
+
       say
       say 'All done!', :green
       say
