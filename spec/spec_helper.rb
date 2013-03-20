@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'bundler'
 require 'tmpdir'
-
 require File.dirname(__FILE__) + '/support/file_matchers'
 
 Bundler.setup
@@ -9,7 +8,6 @@ Bundler.setup
 require 'rspec'
 
 $:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-
 require 'meta_wordpress'
 
 FIXTURES_DIR = Pathname.new(__FILE__).dirname + 'fixtures'
@@ -36,21 +34,19 @@ RSpec.configure do |config|
   def project_path(path = "")
     File.join(@directory, path)
   end
-  
+
   def fixtures_path(path = "")
     File.join(@fixtures_path, path)
   end
 
-  def capture(stream)
+  def capture(stream = :stdout)
     begin
-      stream = stream.to_s
       eval "$#{stream} = StringIO.new"
       yield
       result = eval("$#{stream}").string
     ensure
       eval("$#{stream} = #{stream.upcase}")
     end
-
     result
   end
 

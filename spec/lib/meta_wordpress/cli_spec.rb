@@ -3,12 +3,14 @@ require 'meta_wordpress/cli'
 
 describe MetaWordpress::CLI do
 
-  before(:each) do
-    subject.destination_root = project_path
+  before do
+    MetaWordpress::CLI.stub(:destination_root).and_return(project_path)
   end
 
+  let(:bootstrap) { MetaWordpress::CLI.new }
+
   it "should raise an error if a path is provided" do
-    expect{subject.bootstrap("foo/bar")}.
+    expect{bootstrap.bootstrap("foo/bar")}.
       to raise_error(Thor::Error, /Please provide a folder name/)
   end
 
@@ -17,61 +19,40 @@ describe MetaWordpress::CLI do
   #
 
   describe "#add_dependencies" do
+    let(:gemfile)         { File.join(project_path, 'Gemfile') }
+    let(:gemfile_content) { File.read(gemfile)                 }
 
-    def gemfile; File.join(project_path, 'Gemfile'); end
-    def gemfile_content; File.read(gemfile); end
+    context "with Gemfile in project path" do
+      before(:each) { bootstrap.add_dependencies_to_gemfile }
+      subject { gemfile_content }
 
-    it "should tell what's going on" do
-      output = capture(:stdout) { subject.add_dependencies_to_gemfile }
-      output.should include("Gemfile detected, installing dependencies.")
+      it { should include("gem 'guard-haml'")   }
+      it { should include("gem 'guard-sass'")   }
+      it { should include("gem 'guard-coffee'") }
     end
 
-    context do
-
-      before(:each) do
-        subject.add_dependencies_to_gemfile
-      end
-
-      it "should append the guard-haml gem to the Gemfile" do
-        gemfile_content.should include("gem 'guard-haml'")
-      end
-
-      it "should append the guard-haml gem to the Gemfile" do
-        gemfile_content.should include("gem 'guard-sass'")
-      end
-
-      it "should append the guard-haml gem to the Gemfile" do
-        gemfile_content.should include("gem 'guard-coffee'")
-      end
-
-    end
-
-    describe "without Gemfile" do
+    context "without Gemfile in project path" do
       before(:each) { FileUtils.rm gemfile }
+      subject { capture { bootstrap.add_dependencies_to_gemfile } }
 
-      it "should tell what's going on" do
-        output = capture(:stdout) { subject.add_dependencies_to_gemfile }
-        output.should include("WARNING! No Gemfile found.")
-        output.should include("Ensure that the reuqired dependencies are installed properly.")
-      end
+      it { should include("WARNING! No Gemfile found.") }
+      it { should include("Ensure that the reuqired dependencies are installed properly.") }
     end
-
   end
 
   describe "#copy_guard_file" do
-    it "should copy the guard file" do
-      subject.copy_guard_file
-      'Guardfile'.should have_been_created_in(project_path)
-    end
+    before { bootstrap.copy_guard_file }
+    subject { "Guardfile" }
+
+    it { should have_been_created_in(project_path) }
   end
 
   describe "#create_asset_folders" do
-    before(:each) { subject.create_asset_folders }
+    before(:each) { bootstrap.create_asset_folders }
 
     %w(javascripts stylesheets).each do |folder|
-      it "should create a folder for #{folder}" do
-        folder.should have_been_created_in(project_path)
-      end
+      subject { folder }
+      it { should have_been_created_in(project_path) }
 
       %w(source compiled).each do |sub_folder|
         it "should create a folder for #{sub_folder} #{folder}" do
@@ -87,18 +68,17 @@ describe MetaWordpress::CLI do
   end
 
   describe "#create_views_folder" do
-    it "should create a /views folder" do
-      subject.create_views_folders
-      "views".should have_been_created_in(project_path)
-    end
+    before { bootstrap.create_views_folders }
+    subject { "views" }
+
+    it { should have_been_created_in(project_path) }
   end
 
   describe "#create_view_helpers" do
-    before(:each) { subject.create_view_helpers }
+    before(:each) { bootstrap.create_view_helpers }
+    subject { "view_helpers.rb" }
 
-    it "should create a /views folder" do
-      "view_helpers.rb".should have_been_created_in(project_path)
-    end
+    it { should have_been_created_in(project_path) }
 
     context "the generated content" do
       pending
@@ -110,31 +90,33 @@ describe MetaWordpress::CLI do
   end
 
   describe "#copy_functions_php" do
-    it "should create a functions.php file" do
-      subject.copy_functions_php
-      "functions.php".should have_been_created_in(project_path)
-    end
+    before { bootstrap.copy_functions_php }
+    subject { "functions.php" }
+
+    it { should have_been_created_in(project_path) }
   end
 
   describe "#copy_lib" do
-    it "should copy the contents of the /lib directory" do
-      subject.copy_php_lib
-      "lib".should have_been_created_in(project_path)
-    end
+    before { bootstrap.copy_php_lib }
+    subject { 'lib' }
+
+    it { should have_been_created_in(project_path) }
   end
 
   describe "#ask_for_theme_details" do
-    details = %w(Theme\ name Theme\ url Author(s) Author(s)\ URL Description Version License License\ URL)
-
-    pending
+    it "should ask for details" do
+      details = %w(Theme\ name Theme\ url Author(s) Author(s)\ URL Description Version License License\ URL Tags Text\ domain)
+      # http://www.arailsdemo.com/posts/57
+      $stdin.should_receive(:gets).and_return(*details)
+      bootstrap.ask_for_theme_details('foo')
+    end
   end
 
   describe "#create_stylesheet" do
-    before(:each) { subject.create_stylesheet }
+    before(:each) { bootstrap.create_stylesheet }
+    subject { "style.css" }
 
-    it "should create a style.css file" do
-      "style.css".should have_been_created_in(project_path)
-    end
+    it { should have_been_created_in(project_path) }
 
     it "should contain the theme details" do
       pending
@@ -142,10 +124,15 @@ describe MetaWordpress::CLI do
   end
 
   describe "#copy_theme" do
-    before(:each) { subject.copy_theme }
+    context "theme files" do
+      before do
+        bootstrap.instance_variable_set("@skip_theme", true)
+        bootstrap.copy_theme
+      end
 
-    it "should copy some basic theme files" do
-      pending
+      subject { "views/.gitkeep" }
+
+      it { should have_been_created_in(project_path) }
     end
   end
 
