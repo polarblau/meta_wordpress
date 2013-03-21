@@ -17,6 +17,11 @@ describe "Haml::Helpers" do
       subject { view.php("$foo = 'bar';\n$bar = 'foo';") }
       it { should == "<?php\n  $foo = 'bar';\n  $bar = 'foo';\n?>" }
     end
+
+    context "with block" do
+      subject { haml("= php 'if ($foo):' do\n  %h1= php_e '$foo'\n= php 'endif'") }
+      it { should == "<?php if ($foo): ?>\n<h1><?php echo $foo ?></h1>\n<?php endif ?>\n" }
+    end
   end
 
   describe "#php_e" do
