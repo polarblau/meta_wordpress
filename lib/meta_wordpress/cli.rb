@@ -13,14 +13,15 @@ module MetaWordpress
 
     desc 'bootstrap [THEME]', 'Bootstrap blank meta_wordpress theme with a name of THEME (optional).'
     method_option :skip_theme, :type => :boolean, :default => false, :desc => "Don't create any theme template files."
-    def bootstrap(theme_name = destination_root)
+    def bootstrap(theme_name = nil)
       @skip_theme = options[:skip_theme]
 
-      if theme_name.include?('/')
-        raise Thor::Error.new "Sorry. '#{theme_name}' seems to be a path. Please provide a folder name."
+      if theme_name
+        empty_directory theme_name, :verbose => false
+        @theme_name = theme_name
+      else
+        @theme_name = File.basename(destination_root)
       end
-
-      empty_directory(theme_name) if theme_name != destination_root
 
       say 'Creating theme structure ...'
 
@@ -30,14 +31,13 @@ module MetaWordpress
       create_view_helpers
       copy_functions_php
       copy_php_lib
-      ask_for_theme_details(theme_name)
+      ask_for_theme_details
       create_stylesheet
       copy_screenshot
       copy_theme
 
       say
       say 'All done!', :green
-      say
     end
 
     desc 'start', 'Start guard and listen for changes.'

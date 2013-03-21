@@ -37,9 +37,9 @@ module MetaWordpress
       directory 'lib', 'lib', :verbose => false
     end
 
-    def ask_for_theme_details(theme_name)
+    def ask_for_theme_details
       say "Please provide some details on the theme:"
-      default_theme_name = File.basename(theme_name).humanize
+      default_theme_name = File.basename(@theme_name).humanize
       @theme_name        = ask("Theme name (default: '#{default_theme_name}'):\n      > ") || default_theme_name
       @theme_uri         = ask("Theme URL:\n      > ")
       @theme_author      = ask("Author(s):\n      > ")
@@ -57,7 +57,6 @@ module MetaWordpress
     end
 
     def copy_theme
-      puts "", @skip_theme, ""
       if @skip_theme
         inside('views') { create_file('.gitkeep', :verbose => false) }
       else

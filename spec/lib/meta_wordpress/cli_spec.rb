@@ -9,12 +9,9 @@ describe MetaWordpress::CLI do
 
   let(:bootstrap) { MetaWordpress::CLI.new }
 
-  it "should raise an error if a path is provided" do
-    expect{bootstrap.bootstrap("foo/bar")}.
-      to raise_error(Thor::Error, /Please provide a folder name/)
-  end
+  it "should use the current folder's name as theme name if no name provided"
 
-  it "should create a theme folder if theme name is passed"
+  it "should create a theme folder if theme name is provided"
 
   #
 
@@ -86,7 +83,7 @@ describe MetaWordpress::CLI do
       details = %w(Theme\ name Theme\ url Author(s) Author(s)\ URL Description Version License License\ URL Tags Text\ domain)
       # http://www.arailsdemo.com/posts/57
       $stdin.should_receive(:gets).and_return(*details)
-      bootstrap.ask_for_theme_details('foo')
+      bootstrap.ask_for_theme_details
     end
   end
 
