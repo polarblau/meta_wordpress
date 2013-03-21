@@ -6,16 +6,18 @@ module MetaWordpress
   class CLI < Thor
     include Thor::Actions
 
+    TEMPLATE_PATH = File.expand_path(File.join('..', 'templates'), File.dirname(__FILE__))
+
     no_tasks do
       include BootstrapActions
 
-      def source_path(file)
-        File.expand_path(File.join('..', 'templates', file), File.dirname(__FILE__))
+      def source_path(file = nil)
+        File.join(TEMPLATE_PATH, file)
       end
     end
 
     def self.source_root
-      File.expand_path(File.join('..', 'templates'), File.dirname(__FILE__))
+      TEMPLATE_PATH
     end
 
     desc 'bootstrap [THEME]', 'Bootstrap blank meta_wordpress theme with a name of THEME (optional).'
