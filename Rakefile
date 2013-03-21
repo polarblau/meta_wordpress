@@ -7,4 +7,13 @@ RSpec::Core::RakeTask.new(:rspec) do |spec|
   spec.rspec_opts = ['-cfs --backtrace --color']
 end
 
-task :default => :rspec
+task :simpleunit do
+  system "php test/layout_test.php"
+end
+
+task :test_all do
+  Rake::Task["rspec"].invoke
+  Rake::Task["simpleunit"].invoke
+end
+
+task :default => :test_all
