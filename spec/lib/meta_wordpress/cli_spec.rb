@@ -43,7 +43,7 @@ describe MetaWordpress::CLI do
   end
 
   describe "#create_views_folder" do
-    before { bootstrap.create_views_folders }
+    before { bootstrap.create_views_folder }
     subject { "views" }
 
     it { should have_been_created_in(project_path) }
@@ -80,6 +80,7 @@ describe MetaWordpress::CLI do
 
   describe "#ask_for_theme_details" do
     it "should ask for details" do
+      bootstrap.instance_variable_set("@theme_folder", 'Foo')
       details = %w(Theme\ name Theme\ url Author(s) Author(s)\ URL Description Version License License\ URL Tags Text\ domain)
       # http://www.arailsdemo.com/posts/57
       $stdin.should_receive(:gets).and_return(*details)

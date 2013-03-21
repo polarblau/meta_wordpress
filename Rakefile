@@ -8,7 +8,6 @@ RSpec::Core::RakeTask.new(:rspec) do |spec|
 end
 
 task :simpletest do
-  puts "Running php unit tests ..."
   if system("which php > /dev/null")
     system "php test/all_tests.php"
   else
@@ -17,8 +16,11 @@ task :simpletest do
 end
 
 task :test_all do
-  Rake::Task["rspec"].invoke
+  puts "Running php unit tests ..."
   Rake::Task["simpletest"].invoke
+
+  puts "Running rspec specs ..."
+  Rake::Task["rspec"].invoke
 end
 
 task :default => :test_all

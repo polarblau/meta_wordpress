@@ -1,14 +1,12 @@
 require 'rubygems'
 require 'bundler'
 require 'tmpdir'
-require File.dirname(__FILE__) + '/support/file_matchers'
+require File.join(File.dirname(__FILE__), 'support', 'file_matchers')
 
 Bundler.setup
 
 require 'rspec'
-
-$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'meta_wordpress'
+require File.join(File.dirname(__FILE__), '..', 'lib', 'meta_wordpress')
 
 FIXTURES_DIR = Pathname.new(__FILE__).dirname + 'fixtures'
 
@@ -17,7 +15,7 @@ RSpec.configure do |config|
 
   # https://github.com/docwhat/homedir/blob/homedir3/spec/spec_helper.rb#L14
   config.before(:each) do
-    $0                  = "wp"
+    $0                  = "meta_wordpress"
     ARGV.clear
     @directory          = Dir.mktmpdir('tmp-spec-')
     @orig_directory     = Dir.pwd

@@ -17,8 +17,8 @@ module MetaWordpress
       end
     end
 
-    def create_views_folders
-      empty_directory source_path('views'), :verbose => false
+    def create_views_folder
+      empty_directory 'views', :verbose => false
     end
 
     def create_view_helpers

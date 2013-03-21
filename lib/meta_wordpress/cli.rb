@@ -37,7 +37,7 @@ module MetaWordpress
       inside(theme_folder || '.') do
         copy_guard_file
         create_asset_folders
-        create_views_folders
+        create_views_folder
         create_view_helpers
         copy_functions_php
         copy_php_lib

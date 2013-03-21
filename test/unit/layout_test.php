@@ -18,9 +18,7 @@ class TestOfSingletonLayout extends UnitTestCase {
   }
 }
 
-
 class TestOfLayout extends UnitTestCase {
-
   function __construct() {
     parent::__construct('Layout class tests');
   }
@@ -32,10 +30,6 @@ class TestOfLayout extends UnitTestCase {
   function testSetLayout() {
     $this->layout->set_layout('foo');
     $this->assertEqual($this->layout->layout, 'foo');
-  }
-
-  function testSetLayoutAgain() {
-    $this->assertNotEqual($this->layout->layout, 'foo');
   }
 
   function testGetLayout() {}
