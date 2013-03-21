@@ -1,5 +1,3 @@
-require 'haml'
-
 module Haml
   module Filters
     module Docs
