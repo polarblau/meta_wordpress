@@ -13,7 +13,7 @@ module Haml
     def stylesheet_link_tag(*args)
       options = args.last.is_a?(Hash) ? args.pop : {}
       capture_haml do
-        args.each do |file|
+        args.map(&:to_s).each do |file|
           file = file.dup + ".css" if File.extname(file) != '.css'
           haml_tag :link, {
             :href => asset_path(file), :media => "screen", :rel => "stylesheet", :type => "text/css"
@@ -32,10 +32,10 @@ module Haml
       when ".png", ".jpg", ".jpeg", ".gif", ".svg"
         "images"
       else
-        raise(ArgumentError, "unknown file extension: '#{file_name}'")
+        raise(ArgumentError, "unknown file extension: '#{File.extname(file_name)}'")
       end
       relative_path = File.join(group, file_name)
-      "#{ php("echo get_bloginfo('stylesheet_directory')") }/#{relative_path}"
+      "#{ php_e("get_bloginfo('stylesheet_directory')") }/#{relative_path}"
     end
 
     def conditionals_html(attrs, &block)
