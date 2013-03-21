@@ -1,25 +1,6 @@
 module MetaWordpress
   module BootstrapActions
 
-    def add_dependencies_to_gemfile
-      if File.exist?(gemfile)
-        say "Gemfile detected, installing dependencies."
-        append_to_file gemfile :verbose => false do
-          <<-EOS
-gem 'guard-haml, :git    => 'git://github.com/polarblau/guard-haml.git',
-                 :branch => 'extensions'
-gem 'guard-sass'
-gem 'guard-coffeescript'
-          EOS
-        end
-      else
-        say "WARNING! No Gemfile found."
-        say "Creating one ..."
-        copy_file 'Gemfile', 'Gemfile', :verbose => false
-      end
-      run "bundle install", :capture => true, :verbose => false
-    end
-
     def copy_guard_file
       copy_file 'Guardfile', 'Guardfile', :verbose => false
     end

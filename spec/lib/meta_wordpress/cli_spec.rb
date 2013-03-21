@@ -18,29 +18,6 @@ describe MetaWordpress::CLI do
 
   #
 
-  describe "#add_dependencies" do
-    let(:gemfile)         { File.join(project_path, 'Gemfile') }
-    let(:gemfile_content) { File.read(gemfile)                 }
-
-    context "with Gemfile in project path" do
-      before(:each) { bootstrap.add_dependencies_to_gemfile }
-      subject { gemfile_content }
-
-      it { should include("gem 'guard-haml'")   }
-      # polarblau branch
-      it { should include("gem 'guard-sass'")   }
-      it { should include("gem 'guard-coffeescript'") }
-    end
-
-    context "without Gemfile in project path" do
-      before(:each) { FileUtils.rm gemfile }
-      subject { capture { bootstrap.add_dependencies_to_gemfile } }
-
-      it { should include("WARNING! No Gemfile found.") }
-      # it should create one
-    end
-  end
-
   describe "#copy_guard_file" do
     before { bootstrap.copy_guard_file }
     subject { "Guardfile" }
