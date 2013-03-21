@@ -12,12 +12,13 @@
  * @version    0.1
  * @since      Version 0.1
  */
-class Layout {
-  private static $instance;
+abstract class LayoutAbstract {
+  //private static $instance;
+  protected static $instance = null;
 
   private $fragments              = array();
   private $fragments_placeholders = array();
-  public $layout                 = null;
+  public $layout                  = null;
   private $template_content       = null;
   private $settings               = array(
     'views_path'          => '',
@@ -25,17 +26,6 @@ class Layout {
     'layouts_path'        => 'layouts',
     'default_layout_name' => 'default'
   );
-
-  // Singleton pattern: http://stackoverflow.com/a/2247384/564721
-  private function __construct() {}
-  private function __clone() {}
-
-  public static function Instance() {
-    if (!Layout::$instance instanceof self) {
-      Layout::$instance = new self();
-    }
-    return Layout::$instance;
-  }
 
   /**
    * Retrieves fragment stored using an identfier or
@@ -293,6 +283,23 @@ class Layout {
     die();
   }
 
+}
+
+
+class Layout extends LayoutAbstract {
+  private function __construct() {}
+  private function __clone() {}
+
+  public static function Instance() {
+    if (!Layout::$instance instanceof self) {
+      Layout::$instance = new self();
+    }
+    return Layout::$instance;
+  }
+}
+
+class LayoutTestCase extends LayoutAbstract {
+  public function __construct() {}
 }
 
 ?>
