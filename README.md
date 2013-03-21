@@ -15,11 +15,29 @@ This gem lets you use the original implementations of all your favorite meta lan
 
 ### Installation
 
-Install the gem:
+***
+
+**NOTE!**
+
+meta_wordpress relies on an extension to the guard-haml gem. Since this extension hasn’t been released, you’re currently required to create a directory for your project and a Gemfile with the following content:
+
+```ruby
+source :rubygems
+
+gem 'meta_wordpress', :path   => '~/Projects/gems/meta_wordpress'
+gem 'guard-haml',     :git    => 'git://github.com/polarblau/guard-haml.git',
+                      :branch => 'extensions'
+```
+
+Then run `bundle install`.
+
+As soon as the extension is released (I’ve contacted the author) or I’ve released the extension as separate gem you will be able to install meta_wordpress globally using 
 
 ```bash
 gem install meta_wordpress
 ```
+
+***
 
 Then bootstrap a new theme — this will generate all necessary files for your:
 
