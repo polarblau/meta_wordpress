@@ -29,13 +29,13 @@ gem 'guard-haml',     :git    => 'git://github.com/polarblau/guard-haml.git',
                       :branch => 'extensions'
 ```
 
-Then run `bundle install`.
-
-As soon as the extension is released (I’ve contacted the author) or I’ve released the extension as separate gem you will be able to install meta_wordpress globally using 
+Then run
 
 ```bash
-gem install meta_wordpress
+bundle install
 ```
+
+As soon as the extension is released (I’ve contacted the author) or I’ve released the extension as separate gem you will be able to install meta_wordpress globally using `gem install meta_wordpress`.
 
 ***
 
@@ -45,7 +45,7 @@ Then bootstrap a new theme — this will generate all necessary files for your:
 # navigate to the themes folder
 cd http/wp-content/themes/
 # bootstrap
-wp bootstrap my_theme
+meta_wordpress bootstrap my_theme
 # navigate to your new theme
 cd my_theme
 ```
@@ -61,7 +61,7 @@ cd my_theme
 Guard is used to watch for changes and recompile files when necessary. For convenience you can start Guard in a Bundler context using:
 
 ```bash
-wp start
+meta_wordpress start
 ```
 
 #### Helpers
@@ -234,15 +234,8 @@ yield_content
 # => <?php yield() ?>
 ```
 
-**Argument conversion!** — Symbols are converted to PHP variables for convenience:
-
-```ruby
-layout(:foo, "bar", 1, true)
-# => <?php use_layout($foo, "bar", 1, true) ?>
-```
 
 ## TODO
 
-* Clean installation logs and add some help texts
 * Better error handling and display
 * Add full Haml version of a basic theme when bootstrapping
