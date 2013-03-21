@@ -5,7 +5,14 @@ require 'active_support/core_ext/string/inflections'
 module MetaWordpress
   class CLI < Thor
     include Thor::Actions
-    no_tasks { include BootstrapActions }
+
+    no_tasks do
+      include BootstrapActions
+
+      def source_path(file)
+        File.expand_path(File.join('..', 'templates', file), File.dirname(__FILE__))
+      end
+    end
 
     def self.source_root
       File.expand_path(File.join('..', 'templates'), File.dirname(__FILE__))
@@ -13,28 +20,30 @@ module MetaWordpress
 
     desc 'bootstrap [THEME]', 'Bootstrap blank meta_wordpress theme with a name of THEME (optional).'
     method_option :skip_theme, :type => :boolean, :default => false, :desc => "Don't create any theme template files."
-    def bootstrap(theme_name = nil)
+    def bootstrap(theme_folder = nil)
       @skip_theme = options[:skip_theme]
 
-      if theme_name
-        empty_directory theme_name, :verbose => false
-        @theme_name = theme_name
+      if theme_folder
+        empty_directory theme_folder, :verbose => false
+        @theme_folder = theme_folder
       else
-        @theme_name = File.basename(destination_root)
+        @theme_folder = File.basename(destination_root)
       end
 
       say 'Creating theme structure ...'
 
-      copy_guard_file
-      create_asset_folders
-      create_views_folders
-      create_view_helpers
-      copy_functions_php
-      copy_php_lib
-      ask_for_theme_details
-      create_stylesheet
-      copy_screenshot
-      copy_theme
+      inside(theme_folder || '.') do
+        copy_guard_file
+        create_asset_folders
+        create_views_folders
+        create_view_helpers
+        copy_functions_php
+        copy_php_lib
+        ask_for_theme_details
+        create_stylesheet
+        copy_screenshot
+        copy_theme
+      end
 
       say
       say 'All done!', :green
