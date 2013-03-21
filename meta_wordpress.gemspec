@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
 
   # Dependencies
   # (There's a lot of them, because this gem is merely a collector at this point)
+  s.add_dependency 'bundler'
   s.add_dependency 'thor',                '>= 0.14.6'
   s.add_dependency 'active_support',      '~> 3.0.0'
 
@@ -28,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rb-fsevent',          '~> 0.9.1'
 
   s.add_dependency 'haml',                '~> 3.1.7'
-  # s.add_dependency 'guard-haml' -- currently misses my extension detection -> Gemfile
+  # s.add_dependency 'guard-haml'
 
   s.add_dependency 'sass',                '~> 3.2'
   s.add_dependency 'guard-sass',          '~> 1.0.1'
@@ -37,6 +38,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'guard-coffeescript',  '~> 1.2.1'
 
   # Dev dependencies
-  s.add_development_dependency 'bundler'
-  s.add_development_dependency 'rspec',       '~> 2.11.0'
+  s.add_development_dependency 'rspec',   '~> 2.11.0'
 end
