@@ -4,12 +4,18 @@ module MetaWordpress
     def add_dependencies_to_gemfile
       if File.exist?(gemfile)
         say "Gemfile detected, installing dependencies."
-        %w(haml sass coffee).each do |guard_pkg|
-          append_to_file gemfile, "\ngem 'guard-#{guard_pkg}'", :verbose => false
+        append_to_file gemfile :verbose => false do
+          <<-EOS
+gem 'guard-haml, :git    => 'git://github.com/polarblau/guard-haml.git',
+                 :branch => 'extensions'
+gem 'guard-sass'
+gem 'guard-coffeescript'
+          EOS
         end
       else
         say "WARNING! No Gemfile found."
-        say "Ensure that the reuqired dependencies are installed properly."
+        say "Creating one ..."
+        copy_file 'Gemfile', 'Gemfile', :verbose => false
       end
       run "bundle install", :capture => true, :verbose => false
     end
@@ -42,6 +48,10 @@ module MetaWordpress
       copy_file 'functions.php', 'functions.php', :verbose => false
     end
 
+    def copy_screenshot
+      copy_file 'screenshot.png', 'screenshot.png', :verbose => false
+    end
+
     def copy_php_lib
       directory 'lib', 'lib', :verbose => false
     end
@@ -66,6 +76,7 @@ module MetaWordpress
     end
 
     def copy_theme
+      puts "", @skip_theme, ""
       if @skip_theme
         inside('views') { create_file('.gitkeep', :verbose => false) }
       else

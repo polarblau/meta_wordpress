@@ -22,7 +22,8 @@ module MetaWordpress
 
       empty_directory(theme_name) if theme_name != destination_root
 
-      add_dependencies_to_gemfile
+      say 'Creating theme structure ...'
+
       copy_guard_file
       create_asset_folders
       create_views_folders
@@ -31,6 +32,7 @@ module MetaWordpress
       copy_php_lib
       ask_for_theme_details(theme_name)
       create_stylesheet
+      copy_screenshot
       copy_theme
 
       say

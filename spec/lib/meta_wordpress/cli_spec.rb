@@ -27,8 +27,9 @@ describe MetaWordpress::CLI do
       subject { gemfile_content }
 
       it { should include("gem 'guard-haml'")   }
+      # polarblau branch
       it { should include("gem 'guard-sass'")   }
-      it { should include("gem 'guard-coffee'") }
+      it { should include("gem 'guard-coffeescript'") }
     end
 
     context "without Gemfile in project path" do
@@ -36,7 +37,7 @@ describe MetaWordpress::CLI do
       subject { capture { bootstrap.add_dependencies_to_gemfile } }
 
       it { should include("WARNING! No Gemfile found.") }
-      it { should include("Ensure that the reuqired dependencies are installed properly.") }
+      # it should create one
     end
   end
 
@@ -121,6 +122,13 @@ describe MetaWordpress::CLI do
     it "should contain the theme details" do
       pending
     end
+  end
+
+  describe "#copy_screenshot" do
+    before { bootstrap.copy_screenshot }
+    subject { 'screenshot.png' }
+
+    it { should have_been_created_in(project_path) }
   end
 
   describe "#copy_theme" do
