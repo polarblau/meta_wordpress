@@ -46,7 +46,7 @@ module Haml
         argument[0] == "$" ? argument : "'#{argument}'"
       when Hash
         "array(" +
-        argument.map {|k,v|
+        argument.map {|k, v|
           "#{convert_php_arguments(k)} => #{convert_php_arguments(v)}"
         }.join(", ") + ")"
       when Array
