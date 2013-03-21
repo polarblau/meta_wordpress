@@ -13,7 +13,6 @@ FIXTURES_DIR = Pathname.new(__FILE__).dirname + 'fixtures'
 RSpec.configure do |config|
   config.order = 'random'
 
-  # https://github.com/docwhat/homedir/blob/homedir3/spec/spec_helper.rb#L14
   config.before(:each) do
     $0                  = "meta_wordpress"
     ARGV.clear
@@ -46,6 +45,10 @@ RSpec.configure do |config|
       eval("$#{stream} = #{stream.upcase}")
     end
     result
+  end
+
+  def haml(string)
+    Haml::Engine.new(string).render
   end
 
 end
