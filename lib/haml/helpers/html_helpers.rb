@@ -38,7 +38,7 @@ module Haml
       "#{ php_e("get_bloginfo('stylesheet_directory')") }/#{relative_path}"
     end
 
-    def conditionals_html(attrs, &block)
+    def conditionals_html(attrs={}, &block)
       attrs.keys.each do |key|
         attrs[(key.to_sym rescue key) || key] = attrs.delete(key)
       end
