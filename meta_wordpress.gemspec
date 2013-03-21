@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.platform      = Gem::Platform::RUBY
   s.require_paths = ['lib']
   s.rubyforge_project = '[none]'
-  s.executable   = 'wp'
+  s.executable   = 'meta_wordpress'
 
   # Dependencies
   # (There's a lot of them, because this gem is merely a collector at this point)
