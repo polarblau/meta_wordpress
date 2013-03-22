@@ -22,7 +22,7 @@ module MetaWordpress
     end
 
     def create_view_helpers
-      template source_path('view_helpers.tt'), 'view_helpers.rb', :verbose => false
+      copy_file source_path('view_helpers.rb'), 'view_helpers.rb', :verbose => false
     end
 
     def copy_functions_php

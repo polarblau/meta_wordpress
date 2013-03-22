@@ -54,14 +54,6 @@ describe MetaWordpress::CLI do
     subject { "view_helpers.rb" }
 
     it { should have_been_created_in(project_path) }
-
-    context "the generated content" do
-      pending
-    end
-
-    context "the generated content when skipping the theme" do
-      pending
-    end
   end
 
   describe "#copy_functions_php" do
