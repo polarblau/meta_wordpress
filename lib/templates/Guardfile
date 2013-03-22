@@ -1,5 +1,10 @@
 require 'meta_wordpress'
 
+guard :reload_meta_wordpress,
+      :all_on_start => true do
+        watch('view_helpers.rb')
+      end
+
 guard 'coffeescript',
       :all_on_start => true,
       :input        => 'javascripts/source',

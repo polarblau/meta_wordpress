@@ -18,6 +18,4 @@ module ViewHelpers
 
   # Define your own helpers here!
 
-  # NOTE: You will need to restart Guard after any changes to this file.
-
 end
