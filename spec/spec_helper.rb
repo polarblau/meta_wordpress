@@ -19,8 +19,8 @@ RSpec.configure do |config|
     @directory          = Dir.mktmpdir('tmp-spec-')
     @orig_directory     = Dir.pwd
     Dir.chdir(@directory)
-    @fixtures_path = File.join(Pathname.new(__FILE__).dirname, 'fixtures')
-    FileUtils.cp_r(Dir.glob(fixtures_path("*")), @directory)
+    #@fixtures_path = File.join(Pathname.new(__FILE__).dirname, 'fixtures')
+    #FileUtils.cp_r(Dir.glob(fixtures_path("*")), @directory)
   end
 
   config.after(:each) do
