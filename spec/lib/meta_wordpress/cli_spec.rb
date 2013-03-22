@@ -15,6 +15,13 @@ describe MetaWordpress::CLI do
 
   #
 
+  describe "#copy_gem_file" do
+    before { bootstrap.copy_gem_file }
+    subject { "Gemfile" }
+
+    it { should have_been_created_in(project_path) }
+  end
+
   describe "#copy_guard_file" do
     before { bootstrap.copy_guard_file }
     subject { "Guardfile" }
