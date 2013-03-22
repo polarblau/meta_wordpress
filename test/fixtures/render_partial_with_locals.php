@@ -1,0 +1,1 @@
+Partial! <?php render_partial('simple_with_locals', array('when' => 'This time')) ?>

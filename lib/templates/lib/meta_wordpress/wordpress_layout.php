@@ -1,6 +1,6 @@
 <?php
 
-require_once 'meta_wordpress/layout.class.php';
+require_once dirname(__FILE__) . '/layout.class.php';
 
 // Global aliases to be used in views:
 function layout_settings($settings) {

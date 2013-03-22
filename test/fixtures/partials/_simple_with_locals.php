@@ -1,0 +1,1 @@
+<?php echo $when ?> with locals!

@@ -1,0 +1,1 @@
+<?php render_partial('simple') ?> partial!
