@@ -1,7 +1,6 @@
 require 'meta_wordpress'
 
-guard :reload_meta_wordpress,
-      :all_on_start => true do
+guard :reload_meta_wordpress do
         watch('view_helpers.rb')
       end
 
