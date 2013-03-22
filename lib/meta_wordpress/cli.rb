@@ -53,7 +53,7 @@ module MetaWordpress
 
     desc 'start', 'Start guard and listen for changes.'
     def start
-      run 'bundle exec guard -n f'
+      run 'guard -n f'
     end
 
   private
