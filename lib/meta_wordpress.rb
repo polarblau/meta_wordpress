@@ -1,5 +1,3 @@
-require 'haml'
-
 require File.expand_path('guard/reload_meta_wordpress.rb', File.dirname(__FILE__))
 
 # we need to be able to reload the view helper

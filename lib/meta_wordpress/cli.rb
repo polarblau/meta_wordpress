@@ -35,6 +35,7 @@ module MetaWordpress
       say 'Creating theme structure ...'
 
       inside(theme_folder || '.') do
+        copy_gem_file
         copy_guard_file
         create_asset_folders
         create_views_folder
@@ -53,7 +54,7 @@ module MetaWordpress
 
     desc 'start', 'Start guard and listen for changes.'
     def start
-      run 'guard -n f'
+      run 'bundle exec guard --no-bundler-warning -n f'
     end
 
   private

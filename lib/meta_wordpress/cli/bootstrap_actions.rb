@@ -1,6 +1,10 @@
 module MetaWordpress
   module BootstrapActions
 
+    def copy_gem_file
+      copy_file source_path('Gemfile'), 'Gemfile', :verbose => false
+    end
+
     def copy_guard_file
       copy_file source_path('Guardfile'), 'Guardfile', :verbose => false
     end
