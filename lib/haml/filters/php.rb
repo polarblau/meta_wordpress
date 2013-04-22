@@ -1,7 +1,6 @@
-module Haml
   module Filters
     module PHP
-      include Haml::Filters::Base
+      include ::Haml::Filters::Base
 
       def render(text)
         "<?php\n  %s\n?>" % text.rstrip.gsub("\n", "\n  ")
@@ -9,4 +8,3 @@ module Haml
 
     end
   end
-end
