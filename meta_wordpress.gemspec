@@ -28,13 +28,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'guard',               '~> 1.5.4'
   s.add_dependency 'rb-fsevent',          '~> 0.9.1'
 
-  s.add_dependency 'haml',                '~> 4.0.0'
   s.add_dependency 'guard-haml-ext',      '~> 0.6.0'
-
-  s.add_dependency 'sass',                '~> 3.2'
   s.add_dependency 'guard-sass',          '~> 1.0.1'
-
-  s.add_dependency 'coffee-script',       '~> 2.2.0'
   s.add_dependency 'guard-coffeescript',  '~> 1.2.1'
 
   # Dev dependencies
