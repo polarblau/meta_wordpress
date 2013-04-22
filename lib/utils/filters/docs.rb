@@ -1,12 +1,3 @@
-puts "Haml defined: #{defined?(Haml)}"
-puts "Haml version: #{Haml::VERSION}"
-module Haml
-  def self.submodules
-    constants.collect {|const_name| const_get(const_name)}.select {|const| const.class == Module}
-  end
-end
-puts "Haml submodules: #{Haml.submodules.join(', ')}"
-
 module Utils
   module Filters
     module Docs

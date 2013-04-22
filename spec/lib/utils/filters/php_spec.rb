@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Haml::Filters::PHP do
+describe Utils::Filters::PHP do
 
   it "should render single line of PHP code" do
     haml(":php\n  $foo = 'bar';").

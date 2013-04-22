@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Haml::Filters::Docs do
+describe Utils::Filters::Docs do
 
   it "should render single line docs" do
     haml(":docs\n  Foobar").
