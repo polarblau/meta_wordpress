@@ -1,12 +1,12 @@
-require 'haml'
+module Haml
+  module Filters
+    module PHP
+      include Haml::Filters::Base
 
-module Filters
-  module PHP
-    include ::Haml::Filters::Base
+      def render(text)
+        "<?php\n  %s\n?>" % text.rstrip.gsub("\n", "\n  ")
+      end
 
-    def render(text)
-      "<?php\n  %s\n?>" % text.rstrip.gsub("\n", "\n  ")
     end
-
   end
 end
