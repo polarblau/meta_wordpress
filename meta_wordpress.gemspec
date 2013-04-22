@@ -21,13 +21,15 @@ Gem::Specification.new do |s|
 
   # Dependencies
   # (There's a lot of them, because this gem is merely a collector at this point)
+  s.add_runtime_dependency 'haml',        '>= 0'
+  
   s.add_dependency 'bundler'
   s.add_dependency 'thor',                '>= 0.14.6'
   s.add_dependency 'active_support',      '~> 3.0.0'
 
   s.add_dependency 'guard',               '~> 1.5.4'
   s.add_dependency 'rb-fsevent',          '~> 0.9.1'
-
+  
   s.add_dependency 'guard-haml-ext',      '~> 0.6.0'
   s.add_dependency 'guard-sass',          '~> 1.0.1'
   s.add_dependency 'guard-coffeescript',  '~> 1.2.1'
