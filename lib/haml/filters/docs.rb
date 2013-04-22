@@ -1,4 +1,4 @@
-module Utils
+module Haml
   module Filters
     module Docs
       include ::Haml::Filters::Base

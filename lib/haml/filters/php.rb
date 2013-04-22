@@ -1,4 +1,4 @@
-module Utils
+module Haml
   module Filters
     module PHP
       include ::Haml::Filters::Base
