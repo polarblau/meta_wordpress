@@ -24,8 +24,8 @@ THEME_FOLDER
 |         +-- modernizr-2.6.2.min*
 |-- lib
 |    +-- meta_wordpress
-|         |-- layout.class.php
-|         +-- wordpress_layout.php
+|    |    |-- layout.class.php
+|    |    +-- wordpress_layout.php
 |    +-- meta_wordpress.php  
 |-- README.md
 |-- screenshot.png
@@ -40,10 +40,10 @@ THEME_FOLDER
 +-- views
      |-- index.php.haml*
      +-- layouts
-          +--default.php.haml*
+     |    +--default.php.haml*
      +-- partials
-          |-- _footer.php.haml*
-          +-- _header.php.haml*
+     |    |-- _footer.php.haml*
+     |    +-- _header.php.haml*
      +-- single.php.haml*
 ```
 
