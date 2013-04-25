@@ -2,7 +2,7 @@
 
 *meta_wordpress* is a small library built around [Guard](https://github.com/guard/guard) which enables you to create Wordpress themes more easily, using meta languages such as Haml, Sass and Coffeescript. 
 
-It provides a [basic folder structure ](/docs/executable.md) to get started, a simple [layout engine](/docs/executable.md) and a [few helpers](/docs/executable.md) to make the work with PHP easier. Read the [documentation](/docs/index.md) to learn more.
+It provides a [basic folder structure ](/docs/executable.md) to get started, a simple [layout engine](/docs/layout.md) and a [few helpers](/docs/helpers.md) to make the work with PHP easier. Read the [documentation](/docs/index.md) to learn more.
 
 ***
 
